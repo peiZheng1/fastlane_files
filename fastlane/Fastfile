@@ -7,11 +7,11 @@ lane :release_pod do |options|
   spec_path      = "#{target_project}.podspec"
 
   if target_project.nil? || target_project.empty? || target_version.nil? || target_version.empty?
-    UI.message("❌ Project name and version number are required parameters")
+    UI.message("鉂� Project name and version number are required parameters")
     exit
   end
 
-  UI.message("👉 Start release lib #{target_project} new version #{target_version}")
+  UI.message("馃憠 Start release lib #{target_project} new version #{target_version}")
 
   git_pull
   ensure_git_branch
@@ -25,7 +25,7 @@ lane :release_pod do |options|
     end
   rescue
     error_message = "#{$!}"
-    UI.message("⚠️ commit error:#{error_message}")
+    UI.message("鈿狅笍 commit error:#{error_message}")
     unless error_message.include?("nothing to commit, working directory clean")
       exit
     end
@@ -33,7 +33,7 @@ lane :release_pod do |options|
   end
   push_to_git_remote
   if git_tag_exists(tag: target_version)
-      UI.message("Tag #{target_version} already exists, then, delete it! 💥")
+      UI.message("Tag #{target_version} already exists, then, delete it! 馃挜")
       remove_git_tag(tag: target_version)
   end
   add_git_tag(tag: target_version)
@@ -41,9 +41,9 @@ lane :release_pod do |options|
   pod_lib_lint(allow_warnings: true)
   if target_repo
     pod_push(path: spec_path, repo: target_repo, allow_warnings: true)
-    UI.message("Release lib #{target_project} new version #{target_version} to repo #{target_repo} Successfully! 🎉 ")
+    UI.message("Release lib #{target_project} new version #{target_version} to repo #{target_repo} Successfully! 馃帀 ")
   else
     pod_push(path: spec_path, allow_warnings: true)
-    UI.message("Release lib #{target_project} new version #{target_version} to CocoaPods/Specs Successfully! 🎉 ")
+    UI.message("Release lib #{target_project} new version #{target_version} to CocoaPods/Specs Successfully! 馃帀 ")
   end
 end

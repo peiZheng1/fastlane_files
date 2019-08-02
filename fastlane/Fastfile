@@ -29,10 +29,3 @@ push_to_git_remote
 
 pod_lib_lint(allow_warnings: true, use_libraries:true, verbose:true)
 
-if target_repo
-
-    pod_push(repo: target_repo, path: spec_path, allow_warnings: true, use_libraries:true, verbose:true)
-  else
-    pod_push(path: spec_path, allow_warnings: true, use_libraries:true, verbose:true)
-  end
-end

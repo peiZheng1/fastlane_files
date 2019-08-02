@@ -29,3 +29,4 @@ push_to_git_remote
 
 pod_lib_lint(allow_warnings: true, use_libraries:true, verbose:true)
 
+end

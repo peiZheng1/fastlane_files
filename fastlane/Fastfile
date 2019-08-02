@@ -6,33 +6,15 @@ lane :release_pod do |options|
   spec_parm = options[:parm]
   spec_path      = "#{target_project}.podspec"
   
-  
-version_bump_podspec(path: spec_path, version_number: target_version)
-  git_add(path: '.')
-
-
-if target_desc
-git_commit(path: '.', message: target_desc)
-else
-git_commit(path: '.', message: 'release')
-end
-
-
-push_to_git_remote
 
 
 
-  add_git_tag(tag: target_version)
-
- push_git_tags
-
-
-pod_lib_lint(allow_warnings: true, use_libraries:true, verbose:true)
+pod_lib_lint(allow_warnings: true #{spec_parm})
 
 if target_repo
 
-    pod_push(repo: target_repo, path: spec_path, allow_warnings: true, use_libraries:true, verbose:true)
+    pod_push(repo: target_repo, path: spec_path, allow_warnings: true #{spec_parm})
   else
-    pod_push(path: spec_path, allow_warnings: true, use_libraries:true, verbose:true)
+    pod_push(path: spec_path, allow_warnings: true #{spec_parm})
   end
 end
